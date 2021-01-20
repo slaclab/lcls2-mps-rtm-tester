@@ -30,7 +30,8 @@ class CpswRoot():
         # Create interfaces to the RTM I/O related registers
         self.rtm_output = ScalVal.create(
             self.root.findByName(
-                "mmio/AppTop/AppCore/MpsLinkNodeCore/MpsDigitalMessage/OutputBits"))
+                "mmio/AppTop/AppCore/MpsLinkNodeCore/MpsDigitalMessage/"
+                "OutputBits"))
         self.rtm_output_rbv = ScalVal_RO.create(
             self.root.findByName(
                 "mmio/AppTop/AppCore/RtmMpsLinkNode/RtmDout"))
