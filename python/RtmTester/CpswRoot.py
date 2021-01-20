@@ -65,7 +65,7 @@ class CpswRoot():
         """
 
         # Check if the channel number is in range
-        if channel not in range(8):
+        if (channel < 0) or (channel > 7):
             raise RuntimeError(f"Invalid output channel number {channel}")
 
         # Convert the channel number to a mask
@@ -90,7 +90,7 @@ class CpswRoot():
         """
 
         # Check if the word is in range
-        if value > 255:
+        if (value < 0) or (value > 255):
             raise RuntimeError(f"Invalid output word value {value}")
 
         # Write and verify the outputs
