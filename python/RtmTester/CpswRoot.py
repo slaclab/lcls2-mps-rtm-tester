@@ -42,14 +42,14 @@ class CpswRoot():
         """
         Configure the timing module to receive LCLS1 time.
         """
-        self.timing_outputconfig.setVal('RTMTIMING_IN0')
+        self.timing_outputconfig.setVal('RTM_TIMING_IN0')
         self.timing_clksel.setVal(0)
 
     def setTimingLcls2mode(self):
         """
         Configure the timing module to receive LCLS2 time.
         """
-        self.timing_outputconfig.setVal('RTMTIMING_IN1')
+        self.timing_outputconfig.setVal('RTM_TIMING_IN1')
         self.timing_clksel.setVal(1)
 
     def checkTimingLink(self):
