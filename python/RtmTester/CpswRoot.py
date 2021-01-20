@@ -108,7 +108,7 @@ class CpswRoot():
         # Return the status of the selected channel
         return bool(inputs & mask)
 
-    def getRtminputWord(self):
+    def getRtmInputWord(self):
         """
         Get all the RTM input word.
         """
