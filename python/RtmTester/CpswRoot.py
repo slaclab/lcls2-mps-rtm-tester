@@ -81,14 +81,20 @@ class CpswRoot():
             # Clear the bit corresponding to the channel
             outputs &= ~mask
 
-        # Write the updated value
-        self.rtm_output.setVal(outputs)
+        # Write and verify the updated value
+        self._setAndVerifyRtmOutputs(value=outputs)
 
     def setRtmOutputWord(self, value):
         """
         Set all the RTM output using a word.
         """
-        self.rtm_output.setVal(value)
+
+        # Check if the word is in range
+        if value > 255:
+            raise RuntimeError(f"Invalid output word value {value}")
+
+        # Write and verify the outputs
+        self._setAndVerifyRtmOutputs(value=value)
 
     def getRtmInputChannel(self, channel):
         """
@@ -113,3 +119,19 @@ class CpswRoot():
         Get all the RTM input word.
         """
         return self.rtm_inputs.getVal()
+
+    def _setAndVerifyRtmOutputs(self, value):
+        """
+        Write the output word and verify that the read-back matches.
+        """
+
+        # Write the outputs
+        self.rtm_output.setVal(value)
+
+        # Read back the output status
+        readback = self.rtm_output_rbv.getVal()
+
+        # Check if the read-back value matches with what we wrote
+        if readback != value:
+            raise RuntimeError("Outs were not set correctly. "
+                               f"Set = {value}, read-back = {readback}")
