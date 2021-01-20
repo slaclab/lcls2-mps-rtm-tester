@@ -59,7 +59,7 @@ class CpswRoot():
         """
         return bool(self.timing_rxlinkup.getVal())
 
-    def setRtmOutputChannel(self, channel, value):
+    def setRtmOutputChannel(self, channel, value=True):
         """
         Set an RTM output channel
         """
