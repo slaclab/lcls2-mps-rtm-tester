@@ -98,6 +98,12 @@ arg_parser()
         echo "Invalid slot number! Must be a number between 2 and 7."
         exit 1
     fi
+
+    # Verify that CPU is reachable
+    checkNodeConnection ${cpu_name}
+
+    # Verify that the shelfmanager is reachable
+    checkNodeConnection ${shelfmanager}
 }
 
 getGitHashFW()
@@ -211,15 +217,17 @@ checkFW()
     fi
 }
 
-# Check if the CPU is reachable
-# Exit with '1' if the CPU is not reachable.
-checkCPU()
+# Check if the passed node is reachable.
+# The node name is passed as the first argument.
+# Exit with '1' if the node is not reachable.
+checkNodeConnection()
 {
+    local node_name=$1
+
     # Check connection with cpu. Exit on error
-    printf "Using remote CPU: ${cpu_name}\n"
-    printf "Checking connection with remote CPU...            "
-    if ! ping -c 2 ${cpu_name} &> /dev/null ; then
-        printf "CPU not reachable!\n"
+    printf "Checking connection with ${node_name}...         "
+    if ! ping -c 2 ${node_name} &> /dev/null ; then
+        printf "Not reachable!\n"
         exit 1
     else
         printf "Connection OK!\n"
