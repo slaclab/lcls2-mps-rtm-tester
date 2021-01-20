@@ -8,7 +8,7 @@
 #############
 
 # Parse the inputs arguments.
-arg_parser
+arg_parser "$@"
 
 # Get FPGA IP address
 getFpgaIpAddr
