@@ -35,7 +35,6 @@ cpsw_env_script=${cpsw_top_dir}/${cpsw_version}/env.slac.sh
 # Trap TERM signals and exit
 trap "echo 'An ERROR was found. Check shelf manager & card state! Aborting...'; exit 1" TERM
 
-
 ########################
 # Function definitions #
 ########################
@@ -56,14 +55,14 @@ getFpgaIpAddr
 # Firmware version checking
 checkFW
 
+# Create list of argument for the python script
+args="--yaml ${yaml_top} --ip-addr ${fpga_ip}"
+if [ ! -z "${manual}" ]; then
+	args += " --manual"
+fi
+
 # Run the Timing test
 executeRemoteCommand \
 	"export PYTHONPATH=${top_dir}/python/:${PYTHONPATH} && \
         . ${cpsw_env_script} > /dev/null && \
-	python3 ${top_dir}/scripts/test-rtm.py --yaml ${yaml_top} --ip-addr ${fpga_ip}"
-
-if [ -z "${manual}" ]; then
-    echo "using automatic test mode"
-else
-    echo "Using manual test mode"
-fi
+	python3 ${top_dir}/scripts/test-rtm.py ${args}"
