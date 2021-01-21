@@ -2,7 +2,7 @@
 
 import argparse
 
-from RtmTester.CpswRoot import CpswRoot
+from RtmTester.CpswRoot import CpswRoot, TimingTester
 
 
 def get_args():
@@ -52,9 +52,8 @@ if __name__ == '__main__':
         top_dev=args.root_dev_name)
 
     # Do timing tests
-    print("############################")
-    print("###    Testing Timing    ###")
-    print("############################")
+    timing_tester = TimingTester(root=root)
+    timing_tester.run_tests()
 
     if args.manual:
         # Do timing tests
