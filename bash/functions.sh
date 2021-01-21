@@ -3,11 +3,15 @@
 ###############
 # Definitions #
 ###############
-# Shell PID
-top_pid=$$
+# TOP directory, replacing the slac.stanford.edu soft link by slac
+# which is not always present in the linuxRT CPUs
+top_dir=$(dirname -- "$(readlink -f $0)" | sed 's/slac.stanford.edu/slac/g')
 
 # This script name
 script_name=$(basename $0)
+
+# Shell PID
+top_pid=$$
 
 # Firmware file location
 fw_top_dir="./firmware/ATCA/"
