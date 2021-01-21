@@ -59,13 +59,17 @@ if __name__ == '__main__':
     timing_tester = TimingTester(root=root)
     timing_tester.run_tests()
 
+    # Do I/O tests
     if args.manual:
-        # Do timing tests
-        print("#######################################")
-        print("###    Testing I/O (Manual Mode)    ###")
-        print("#######################################")
+        # Manual testing
+        from RtmTester.IOTester import ManualIOTester as IOTester
+
+        io_tester = IOTester(root=root)
+        io_tester.run_tests()
+
     else:
-        # Do timing tests
-        print("##########################################")
-        print("###    Testing I/O (Automatic Mode)    ###")
-        print("##########################################")
+        # Automatic testing
+        from RtmTester.IOTester import AutomaticIOTester as IOTester
+
+        io_tester = IOTester(root=root, ip_addr='192.168.1.1')
+        io_tester.run_tests()

@@ -14,6 +14,7 @@ class TimingTester():
         """
         Run the tests.
         """
+
         print("########################################")
         print("###    Start of Timing Tests         ###")
         print("########################################")
