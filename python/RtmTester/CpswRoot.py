@@ -15,7 +15,7 @@ class CpswRoot():
         """
         # Crate the CPSW root device
         self.root = Path.loadYamlFile(
-            fileName=yaml_file,
+            yaml_file,
             rootName=top_dev,
             yamlFixup=self.FixupRoot(ip_addr=ip_addr))
 
