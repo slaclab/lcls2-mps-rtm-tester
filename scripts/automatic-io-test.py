@@ -6,7 +6,7 @@ import os
 import subprocess
 import socket
 
-from RtmTester.RtmTester import TesterDevice
+from RtmTester.TesterDevice import TesterDevice
 
 
 # Usage message

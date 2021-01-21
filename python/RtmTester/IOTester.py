@@ -14,7 +14,7 @@ class AutomaticIOTester():
         self.root = root
 
         # Create a tester device object
-        from RtmTester.RtmTester import TesterDevice
+        from RtmTester.TesterDevice import TesterDevice
 
         print("Connecting to tester dev ({ip_addr}:{port_number})...  ",
               end="")
