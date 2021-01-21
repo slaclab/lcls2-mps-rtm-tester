@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import os
+import subprocess
 import socket
 
 
@@ -11,6 +13,30 @@ class TesterDevice:
     """
 
     def __init__(self, ip_addr, port_number):
+        """
+        Initialize object.
+        """
+
+        # Check if the IP address is valid
+        try:
+            socket.inet_aton(ip_addr)
+        except socket.error:
+            print(f"ERROR: Invalid tester device IP address. {ip_addr}")
+            raise
+
+        # Check if the tester device is online
+        print("Trying to ping the tester device...               ", end="")
+        try:
+            dev_null = open(os.devnull, 'w')
+            subprocess.check_call(["ping", "-c2", ip_addr],
+                                  stdout=dev_null,
+                                  stderr=dev_null)
+            print("\033[92mDevice is online!\033[0m")
+        except subprocess.CalledProcessError:
+            print("\033[91mERROR: Device is off-line!\033[0m")
+            raise RuntimeError("Tester device can't be reach!")
+
+        # Create a socket to the tester device
         self.socket = self.SocketHanlder(ip_addr, port_number)
 
     def sendCommand(self, command):
