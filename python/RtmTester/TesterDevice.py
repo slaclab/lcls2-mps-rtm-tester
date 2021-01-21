@@ -22,7 +22,9 @@ class TesterDevice:
             socket.inet_aton(ip_addr)
         except socket.error:
             print(f"ERROR: Invalid tester device IP address. {ip_addr}")
-            raise
+            print("")
+            print("Aborting rest of the test.")
+            exit(1)
 
         # Check if the tester device is online
         print("Trying to ping the tester device...               ", end="")
@@ -34,7 +36,9 @@ class TesterDevice:
             print("\033[92mDevice is online!\033[0m")
         except subprocess.CalledProcessError:
             print("\033[91mERROR: Device is off-line!\033[0m")
-            raise RuntimeError("Tester device can't be reach!")
+            print("")
+            print("Aborting rest of the test.")
+            exit(1)
 
         # Connect to the tester device
         print("Connecting to tester device...                    ", end="")
