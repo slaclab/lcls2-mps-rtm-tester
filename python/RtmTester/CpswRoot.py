@@ -140,10 +140,19 @@ class CpswRoot():
                                f"Set = {value}, read-back = {readback}")
 
     class FixupRoot(YamlFixup):
+        """
+        YamlFixup class, use to override the IP address defined in YAML.
+        """
         def __init__(self, ip_addr):
+            """
+            Initialize object.
+            """
             YamlFixup.__init__(self)
             self.ip_addr = ip_addr
 
         def __call__(self, root, top):
+            """
+            Look for the 'ipAddr' node and override it.
+            """
             ip_addr_node = self.findByName(root, "ipAddr")
             ip_addr_node.set(self.ip_addr)
