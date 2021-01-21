@@ -6,7 +6,7 @@ import os
 import subprocess
 import socket
 
-from RtmTester.RtmTester import Tester
+from RtmTester.RtmTester import TesterDevice
 
 
 # Usage message
@@ -74,7 +74,7 @@ if __name__ == '__main__':
         exit_message("    ERROR: Target can't be reached!")
 
     # Create a tester instance
-    t = Tester(ip_addr=ip_addr, port_number=port_number)
+    t = TesterDevice(ip_addr=ip_addr, port_number=port_number)
 
     # Print the tester device information
     print("Target Firmware Information:")

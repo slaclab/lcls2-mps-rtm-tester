@@ -59,7 +59,7 @@ class SocketHanlder:
         return response
 
 
-class Tester:
+class TesterDevice:
     """
     Class to communicate with the target tester device.
     It provides methods to write the outputs, read the inputs and
