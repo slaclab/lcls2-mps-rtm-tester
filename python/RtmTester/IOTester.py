@@ -16,15 +16,11 @@ class AutomaticIOTester():
         # Create a tester device object
         from RtmTester.TesterDevice import TesterDevice
 
-        print("Connecting to tester dev ({ip_addr}:{port_number})...  ",
-              end="")
-
         self.tester_device = TesterDevice(
             ip_addr=ip_addr,
             port_number=port_number)
 
-        print("Done!")
-
+        # Print tester device firmware information
         print("Tester device firmware information:")
         try:
             print(self.tester_device.readInfo())

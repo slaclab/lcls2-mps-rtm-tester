@@ -36,7 +36,8 @@ class TesterDevice:
             print("\033[91mERROR: Device is off-line!\033[0m")
             raise RuntimeError("Tester device can't be reach!")
 
-        # Create a socket to the tester device
+        # Connect to the tester device
+        print("Connecting to tester device...                    ", end="")
         self.socket = self.SocketHanlder(ip_addr, port_number)
 
     def sendCommand(self, command):
