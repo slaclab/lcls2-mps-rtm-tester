@@ -27,7 +27,7 @@ cpsw_top_dir=/afs/slac/g/lcls/package/cpsw/framework
 cpsw_version=R4.4.2
 
 # CPSW env script
-cpsw_env_scrpt=${cpsw_top_dir}/${cpsw_version}/env.slac.sh
+cpsw_env_script=${cpsw_top_dir}/${cpsw_version}/env.slac.sh
 
 # Trap TERM signals and exit
 trap "echo 'An ERROR was found. Check shelf manager & card state! Aborting...'; exit 1" TERM
@@ -55,9 +55,9 @@ checkFW
 
 # Run the Timing test
 executeRemoteCommand \
-	". ${cpsw_env_scrpt} && \
-	PYTHONPATH=${top_dir}/python:/${PYTHONPATH} && \
-	./scripts/automatic-timing-test.py"
+	"export PYTHONPATH=${top_dir}/python/:${PYTHONPATH} && \
+        . ${cpsw_env_script} && \
+	python3 ${top_dir}/scripts/automatic-timing-test.py"
 
 if [ -z "${manual}" ]; then
     echo "using automatic test mode"
