@@ -203,11 +203,11 @@ class ManualIOTester():
         self.num_output_channels = 8
 
         self.input_channel_index = list(range(self.num_input_channels))
-        self.input_channel_state = [8]*self.num_input_channels
+        self.input_channel_state = [0]*self.num_input_channels
         self.input_channel_tested = ['N']*self.num_input_channels
 
         self.output_channel_index = list(range(self.num_output_channels))
-        self.output_channel_state = [8]*self.num_output_channels
+        self.output_channel_state = [0]*self.num_output_channels
         self.output_channel_tested = ['N']*self.num_output_channels
 
     def run_tests(self):
@@ -234,24 +234,35 @@ class ManualIOTester():
         """
         print("Input Channels:")
         print("=============================")
+
         print("Channel number | ", end="")
         for i in self.input_channel_index:
             print(f" {i:02} |", end="")
+        print("")
+
         print("Tested         | ", end="")
         for i in self.input_channel_tested:
             print(f"  {i} |", end="")
+        print("")
+
         print("Current State  | ", end="")
         for i in self.input_channel_state:
             print(f"  {i} |", end="")
+        print("")
 
         print("Output Channels:")
         print("=============================")
         print("Channel number | ", end="")
         for i in self.output_channel_index:
             print(f" {i:02} |", end="")
+        print("")
+
         print("Tested         | ", end="")
         for i in self.output_channel_tested:
             print(f"  {i} |", end="")
+        print("")
+
         print("Current State  | ", end="")
         for i in self.output_channel_state:
             print(f"  {i} |", end="")
+        print("")
