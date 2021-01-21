@@ -12,7 +12,11 @@ class CpswRoot():
     """
     def __init__(self, yaml_file, ip_addr, top_dev="NetIODev"):
         """
+        Initialize object.
         """
+
+        print(f"Connecting to FPGA (IP={ip_addr})...             ", end="")
+
         # Crate the CPSW root device
         self.root = Path.loadYamlFile(
             yaml_file,
@@ -42,10 +46,13 @@ class CpswRoot():
             self.root.findByName(
                 "mmio/AppTop/AppCore/RtmMpsLinkNode/RtmDin"))
 
+        print("Done!")
+
     def setTimingLcls1mode(self):
         """
         Configure the timing module to receive LCLS1 time.
         """
+
         self.timing_outputconfig.setVal('RTM_TIMING_IN0')
         self.timing_clksel.setVal(0)
 
@@ -53,6 +60,7 @@ class CpswRoot():
         """
         Configure the timing module to receive LCLS2 time.
         """
+
         self.timing_outputconfig.setVal('RTM_TIMING_IN1')
         self.timing_clksel.setVal(1)
 
@@ -60,6 +68,7 @@ class CpswRoot():
         """
         Return if the timing link is up.
         """
+
         return bool(self.timing_rxlinkup.getVal())
 
     def setRtmOutputChannel(self, channel, value=True):
@@ -121,6 +130,7 @@ class CpswRoot():
         """
         Get all the RTM input word.
         """
+
         return self.rtm_inputs.getVal()
 
     def _setAndVerifyRtmOutputs(self, value):
@@ -143,10 +153,12 @@ class CpswRoot():
         """
         YamlFixup class, use to override the IP address defined in YAML.
         """
+
         def __init__(self, ip_addr):
             """
             Initialize object.
             """
+
             YamlFixup.__init__(self)
             self.ip_addr = ip_addr
 
@@ -154,5 +166,6 @@ class CpswRoot():
             """
             Look for the 'ipAddr' node and override it.
             """
+
             ip_addr_node = self.findByName(root, "ipAddr")
             ip_addr_node.set(self.ip_addr)
