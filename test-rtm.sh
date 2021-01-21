@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Import functions
-. ./scripts/functions.sh
+. ./bash/functions.sh
 
 #############
 # Main body #
