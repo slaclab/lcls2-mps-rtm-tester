@@ -21,7 +21,22 @@ class TesterDevice:
         try:
             socket.inet_aton(ip_addr)
         except OSError:
-            print(f"ERROR: Invalid tester device IP address. {ip_addr}")
+            print(f"ERROR: Invalid tester device IP address: {ip_addr}")
+            print("")
+            print("Aborting rest of the test.")
+            exit(1)
+
+        # Check if the port number is valid
+        port_number_valid = False
+        try:
+            port_number = int(port_number)
+            if 1 <= port_number <= 65535:
+                port_number_valid = True
+        except ValueError:
+            pass
+
+        if not port_number_valid:
+            print(f"ERROR: Invalid port number: {port_number}")
             print("")
             print("Aborting rest of the test.")
             exit(1)
@@ -42,7 +57,9 @@ class TesterDevice:
 
         # Connect to the tester device
         print("Connecting to tester device...                    ", end="")
-        self.socket = self.SocketHanlder(ip_addr, port_number)
+        self.socket = self.SocketHanlder(
+            ip_addr=ip_addr,
+            port_number=port_number)
 
     def sendCommand(self, command):
         """
