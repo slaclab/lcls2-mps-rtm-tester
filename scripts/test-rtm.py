@@ -71,5 +71,8 @@ if __name__ == '__main__':
         # Automatic testing
         from RtmTester.IOTester import AutomaticIOTester as IOTester
 
-        io_tester = IOTester(root=root, ip_addr='192.168.1.1')
+        io_tester = IOTester(
+            root=root,
+            ip_addr='192.168.1.100',
+            port_number=5000)
         io_tester.run_tests()
