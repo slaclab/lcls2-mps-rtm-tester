@@ -54,6 +54,6 @@ class ManualIOTester():
 
         print("")
         print("##########################################")
-        print("###    End of Automatic I/O Tests      ###")
+        print("###    End of Manual I/O Tests         ###")
         print("##########################################")
         print("")
