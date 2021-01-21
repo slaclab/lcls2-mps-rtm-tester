@@ -13,7 +13,7 @@ class AutomaticIOTester():
         self.root = root
         self.ip_addr = ip_addr
 
-    def run_tests():
+    def run_tests(self):
         """
         Run the tests.
         """
@@ -42,7 +42,7 @@ class ManualIOTester():
 
         self.root = root
 
-    def run_tests():
+    def run_tests(self):
         """
         Run the tests.
         """
