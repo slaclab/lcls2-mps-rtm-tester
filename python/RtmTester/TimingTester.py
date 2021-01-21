@@ -19,7 +19,7 @@ class TimingTester():
         print("########################################")
         print("")
 
-        print("Testing LCLS1 mode timing...  ")
+        print("Testing LCLS1 mode timing...  ", end="")
         self.root.setTimingLcls1mode()
         if self.root.checkTimingLink():
             print("PASS\n")
@@ -27,7 +27,7 @@ class TimingTester():
             print("FAILED\n")
 
         # Set LCLS2 mode timing, and check if the link is up
-        print("Testing LCLS2 mode timing...  ")
+        print("Testing LCLS2 mode timing...  ", end="")
         self.root.setTimingLcls2mode()
         if self.root.checkTimingLink():
             print("PASS\n")
