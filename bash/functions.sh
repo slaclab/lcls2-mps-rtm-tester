@@ -214,3 +214,10 @@ checkNodeConnection()
         printf "Connection OK!\n"
     fi
 }
+
+# Execute a command in the remote CPU.
+# The command and arguments are passed as argument to this function.
+executeRemoteCommand()
+{
+    ssh -x ${cpu_user_name}@${cpu_name} $@
+}
