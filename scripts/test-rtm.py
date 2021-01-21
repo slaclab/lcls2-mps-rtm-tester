@@ -6,15 +6,16 @@ import os
 import subprocess
 import socket
 
+
 class SocketHanlder:
     """
     Class to handler the TCP socket.
     It provides a method to send a message and read back the response.
     """
     def __init__(self, ip_addr, port_number, terminator='@'):
-        self.ip_addr     = ip_addr
+        self.ip_addr = ip_addr
         self.port_number = port_number
-        self.terminator  = terminator
+        self.terminator = terminator
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         try:
@@ -86,11 +87,9 @@ class Tester:
         # return the response message without the error code.
         return r[1:]
 
-
     # Command to write the outputs
     def writeOutputs(self, val):
         self.sendCommand('=' + str(val))
-
 
     # Command to read the inputs
     def readInputs(self):
@@ -103,13 +102,16 @@ class Tester:
     def readInfo(self):
         return self.sendCommand('i')
 
+
 # Usage message
 def usage(name):
-    print("Usage: {} -a|--addr IP_address -p|--port port_number [-h|--help]".format(name))
+    print("Usage: {} -a|--addr IP_address -p|--port port_number [-h|--help]"
+          .format(name))
     print("    -a|--addr IP_address : Target IP address")
     print("    -p|--port            : Target TCP port number")
     print("    -h|--help]           : Show this message")
     print("")
+
 
 # Exit on error printing a message
 def exit_message(message):
@@ -117,24 +119,26 @@ def exit_message(message):
     print("")
     exit()
 
+
 # Main body
 if __name__ == '__main__':
 
     # Process input arguments.
     try:
-        opts, args = getopt.getopt(sys.argv[1:],"ha:p:",["ip-addr=", "port="])
+        opts, args = getopt.getopt(
+            sys.argv[1:], "ha:p:", ["ip-addr=", "port="])
     except getopt.GetoptError:
         usage(sys.argv[0])
         sys.exit(2)
 
-    ip_addr     = ""
+    ip_addr = ""
     port_number = 0
 
     for opt, arg in opts:
-        if opt in ("-h","--help"):
+        if opt in ("-h", "--help"):
             usage(sys.argv[0])
             sys.exit()
-        elif opt in ("-a","--ip-addr"):
+        elif opt in ("-a", "--ip-addr"):
             ip_addr = arg
         elif opt in ("-p", "--port"):
             try:
@@ -148,18 +152,20 @@ if __name__ == '__main__':
         exit_message("ERROR: Invalid IP Address.")
 
     if port_number == 0:
-        exit_message("ERROR: You must specify a port number.");
+        exit_message("ERROR: You must specify a port number.")
 
     # Check if the device is online
     print("")
     print("Trying to ping the target...")
     try:
-       dev_null = open(os.devnull, 'w')
-       subprocess.check_call(["ping", "-c2", ip_addr], stdout=dev_null, stderr=dev_null)
-       print("    Target is online")
-       print("")
+        dev_null = open(os.devnull, 'w')
+        subprocess.check_call(["ping", "-c2", ip_addr],
+                              stdout=dev_null,
+                              stderr=dev_null)
+        print("    Target is online")
+        print("")
     except subprocess.CalledProcessError:
-       exit_message("    ERROR: Target can't be reached!")
+        exit_message("    ERROR: Target can't be reached!")
 
     # Create a tester instance
     t = Tester(ip_addr=ip_addr, port_number=port_number)
@@ -169,8 +175,8 @@ if __name__ == '__main__':
     try:
         print(t.readInfo())
     except RuntimeError as e:
-        print("readInfo() command return with an error code.")
-
+        print("readInfo() command return with an error code. {}".format(e))
+        raise
 
     # Verify the RTM inputs
     print("Testing inputs channels...")
@@ -181,7 +187,7 @@ if __name__ == '__main__':
 
         try:
             # Navigates all the inputs bits
-            set_val = 2**i;
+            set_val = 2**i
 
             # Write the value in the outputs of the tester device
             t.writeOutputs(set_val)
@@ -197,18 +203,21 @@ if __name__ == '__main__':
 
             r = get_val == set_val
 
-            #log result
+            # Log result
             if r:
                 m = "PASSED"
             else:
                 m = "FAILED"
                 in_ch_error_cnt += 1
-                in_ch_log.append("Error in input channel {}. Set value was: {}, but read back value was {}.".format(i, set_val, get_val))
+                in_ch_log.append("Error in input channel {}. Set value was: {}, \
+                                 but read back value was {}."
+                                 .format(i, set_val, get_val))
 
-            in_ch_result[i] = m;
+            in_ch_result[i] = m
 
         except RuntimeError as e:
-            print("writeOutputs({}) command failed on iteration {}.".format(val, i))
+            print("writeOutputs({}) command failed on iteration {}. {}"
+                  .format(set_val, i, e))
             # log result
         # handler cpsw exceptions
 
@@ -236,7 +245,7 @@ if __name__ == '__main__':
             # Verify that the write and read value match
             # get_val == set_val?
             if i == 5:
-                get_val = 0;
+                get_val = 0
 
             r = get_val == set_val
 
@@ -246,12 +255,15 @@ if __name__ == '__main__':
             else:
                 m = "FAILED"
                 out_ch_error_cnt += 1
-                out_ch_log.append("Error in output channel {}. Set value was: {}, but read back value was {}.".format(i, set_val, get_val))
+                out_ch_log.append("Error in output channel {}. Set value was: \
+                                  {}, but read back value was {}."
+                                  .format(i, set_val, get_val))
 
-            out_ch_result[i] = m;
+            out_ch_result[i] = m
 
         except RuntimeError as e:
-            print("readInputs() command failed on iteration {}.".format(i))
+            print("readInputs() command failed on iteration {}. {}"
+                  .format(i, e))
             # log result
         # handler cpsw exceptions
 
@@ -270,7 +282,7 @@ if __name__ == '__main__':
     print("---------------------")
     print("Channel | Test result")
     print("---------------------")
-    for v,k in in_ch_result.items():
+    for v, k in in_ch_result.items():
         print("   {:02}   | {}".format(v, k))
     print("---------------------")
     print("")
@@ -292,7 +304,7 @@ if __name__ == '__main__':
     print("---------------------")
     print("Channel | Test result")
     print("---------------------")
-    for v,k in out_ch_result.items():
+    for v, k in out_ch_result.items():
         print("   {:02}   | {}".format(v, k))
     print("---------------------")
     print("")
