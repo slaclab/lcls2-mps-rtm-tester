@@ -56,7 +56,7 @@ checkFW
 # Run the Timing test
 executeRemoteCommand \
 	"export PYTHONPATH=${top_dir}/python/:${PYTHONPATH} && \
-        . ${cpsw_env_script} && \
+        . ${cpsw_env_script} > /dev/null && \
 	python3 ${top_dir}/scripts/automatic-timing-test.py"
 
 if [ -z "${manual}" ]; then
