@@ -20,16 +20,16 @@ int outPins[] = { 17, 18, 19, 20, 21, 22, 23, 24, \
 int numInputs = 8;
 int inPins[] = { 3, 5, 6, 8, 9, 14, 15, 16 };
 
-// TCP Server configuration (listening on port 5000
+// TCP Server configuration (listening on port 5000)
 byte mac[] = {
     0x2C, 0xF7, 0xF1, 0x08, 0x1B, 0x0F
 };
 byte ip[] = {
-    192, 168, 1, 100
+    10, 0, 1, 100
 };
-IPAddress myDns(192, 168, 1, 1);
-IPAddress gateway(192, 168, 1, 1);
-IPAddress subnet(255, 255, 255, 0);
+IPAddress myDns(10, 0, 1, 1);
+IPAddress gateway(10, 0, 1, 1);
+IPAddress subnet(255, 0, 0, 0);
 EthernetServer server(5000);
 
 // Fw info string (static information is added here, and dynamic information is appended inside setup()
