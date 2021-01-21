@@ -20,7 +20,7 @@ class TesterDevice:
         # Check if the IP address is valid
         try:
             socket.inet_aton(ip_addr)
-        except socket.error:
+        except OSError:
             print(f"ERROR: Invalid tester device IP address. {ip_addr}")
             print("")
             print("Aborting rest of the test.")
