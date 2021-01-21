@@ -15,7 +15,7 @@ script_name=$(basename $0)
 top_pid=$$
 
 # Firmware file location
-fw_top_dir=./firmware/ATCA/
+fw_top_dir=${top_dir}/firmware/ATCA/
 
 # YAML Top file
 yaml_top=${fw_top_dir}/AmcCarrierMpsAnalogLinkNode_project.yaml/000TopLevel.yaml
