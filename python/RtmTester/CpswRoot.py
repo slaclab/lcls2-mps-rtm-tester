@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from pycpsw import Path, ScalVal, ScalVal_RO
+from pycpsw import Path, ScalVal, ScalVal_RO, YamlFixup
 
 
 class CpswRoot():
@@ -10,11 +10,14 @@ class CpswRoot():
     This class crates an interface to the ATCA AMC carrier FPGA register space,
     using CPSW, for testing the MPS RTM board.
     """
-    def __init__(self, yaml_file, top_dev="NetIODev"):
+    def __init__(self, yaml_file, ip_addr, top_dev="NetIODev"):
         """
         """
         # Crate the CPSW root device
-        self.root = Path.loadYamlFile(yaml_file, top_dev)
+        self.root = Path.loadYamlFile(
+            fileName=yaml_file,
+            rootName=top_dev,
+            yamlFixup=self.FixupRoot(ip_addr=ip_addr))
 
         # Create interfaces to the timing related registers
         self.timing_clksel = ScalVal.create(
@@ -135,3 +138,12 @@ class CpswRoot():
         if readback != value:
             raise RuntimeError("Outs were not set correctly. "
                                f"Set = {value}, read-back = {readback}")
+
+    class FixupRoot(YamlFixup):
+        def __init__(self, ip_addr):
+            YamlFixup.__init__(self)
+            self.ip_addr = ip_addr
+
+        def __call__(self, root, top):
+            ip_addr_node = self.findByName(root, "ipAddr")
+            ip_addr_node.set(self.ip_addr)
