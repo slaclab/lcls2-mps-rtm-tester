@@ -250,6 +250,7 @@ class ManualIOTester():
             print(f"  {i} |", end="")
         print("")
 
+        print("")
         print("Output Channels:")
         print("=============================")
         print("Channel number | ", end="")
