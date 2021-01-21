@@ -17,6 +17,18 @@ top_pid=$$
 # Firmware file location
 fw_top_dir="./firmware/ATCA/"
 
+# Remote CPU user name
+cpu_user_name=laci
+
+# CPSW top directory
+cpsw_top_dir=/afs/slac/g/lcls/package/cpsw/framework
+
+# CPSW version
+cpsw_version=R4.4.2
+
+# CPSW env script
+cpsw_env_scrpt=${cpsw_top_dir}/${cpsw_version}/env.slac.sh
+
 # Trap TERM signals and exit
 trap "echo 'An ERROR was found. Check shelf manager & card state! Aborting...'; exit 1" TERM
 
@@ -40,6 +52,12 @@ getFpgaIpAddr
 
 # Firmware version checking
 checkFW
+
+# Run the Timing test
+executeRemoteCommand \
+	". ${cpsw_env_scrpt} && \
+	PYTHONPATH=${top_dir}/python:/${PYTHONPATH} && \
+	./scripts/automatic-timing-test.py"
 
 if [ -z "${manual}" ]; then
     echo "using automatic test mode"
