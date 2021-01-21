@@ -2,7 +2,8 @@
 
 import argparse
 
-from RtmTester.CpswRoot import CpswRoot, TimingTester
+from RtmTester.CpswRoot import CpswRoot
+from RtmTester.TimingTester import TimingTester
 
 
 def get_args():
@@ -16,7 +17,7 @@ def get_args():
         '--yaml',
         type=str,
         required=True,
-        dest='yaml_top_file',
+        dest='yaml_file',
         help='Path to the top level YAML file (000TopLevel.yaml)')
 
     parser.add_argument(
