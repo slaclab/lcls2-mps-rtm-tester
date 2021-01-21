@@ -15,7 +15,10 @@ script_name=$(basename $0)
 top_pid=$$
 
 # Firmware file location
-fw_top_dir="./firmware/ATCA/"
+fw_top_dir=./firmware/ATCA/
+
+# YAML Top file
+yaml_top=${fw_top_dir}/AmcCarrierMpsAnalogLinkNode_project.yaml/000TopLevel.yaml
 
 # Remote CPU user name
 cpu_user_name=laci
@@ -57,7 +60,7 @@ checkFW
 executeRemoteCommand \
 	"export PYTHONPATH=${top_dir}/python/:${PYTHONPATH} && \
         . ${cpsw_env_script} > /dev/null && \
-	python3 ${top_dir}/scripts/automatic-timing-test.py"
+	python3 ${top_dir}/scripts/test-rtm.py --yaml ${yaml_top} --ip-addr ${fpga_ip}"
 
 if [ -z "${manual}" ]; then
     echo "using automatic test mode"
