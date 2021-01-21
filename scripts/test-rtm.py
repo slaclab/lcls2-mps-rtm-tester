@@ -52,6 +52,9 @@ if __name__ == '__main__':
         ip_addr=args.ip_addr,
         top_dev=args.root_dev_name)
 
+    print("Starting tests...")
+    print("")
+
     # Do timing tests
     timing_tester = TimingTester(root=root)
     timing_tester.run_tests()
