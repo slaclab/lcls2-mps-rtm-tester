@@ -58,7 +58,7 @@ checkFW
 # Create list of argument for the python script
 args="--yaml ${yaml_top} --ip-addr ${fpga_ip}"
 if [ ! -z "${manual}" ]; then
-	args += " --manual"
+	args+=" --manual"
 fi
 
 # Run the Timing test
