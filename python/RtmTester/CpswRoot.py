@@ -131,7 +131,13 @@ class CpswRoot():
         Get all the RTM input word.
         """
 
-        return self.rtm_inputs.getVal()
+        val = self.rtm_inputs.getVal()
+
+        # Verify that the read word is in range
+        if val >= 2**32:
+            raise RuntimeError(f"ERROR: Read input word {val} is out of range")
+
+        return val
 
     def _setAndVerifyRtmOutputs(self, value):
         """
