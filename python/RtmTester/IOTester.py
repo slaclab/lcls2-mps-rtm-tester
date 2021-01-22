@@ -243,12 +243,12 @@ class ManualIOTester():
 
         print("Channel number | ", end="")
         for i in self.input_channel_index:
-            print(" {i:02} |", end="")
+            print(f" {i:02} |", end="")
         print("")
 
         print("Tested         | ", end="")
         for i in self.input_channel_tested:
-            print("  {i} |", end="")
+            print(f"  {i} |", end="")
         print("")
 
         print("")
