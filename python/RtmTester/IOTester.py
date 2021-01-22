@@ -304,6 +304,13 @@ class ManualIOTester():
             win.addstr(f"  {i} |")
         win.addstr("\n")
 
+        win.addstr("\n")
+        win.addstr("Instructions:\n")
+        win.addstr("-------------\n")
+        win.addstr("Press a number between 0 and 7 to "
+                   "toggle the corresponding output channel.\n")
+        win.addstr("Press the ESC key to stop test\n")
+
     def _main_curses(self, win):
         """
         Main curses application.
