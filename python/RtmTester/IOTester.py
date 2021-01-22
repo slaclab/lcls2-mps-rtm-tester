@@ -241,21 +241,26 @@ class ManualIOTester():
         print("Input Channels:")
         print("=============================")
 
-        print("Channel number | ", end="")
-        for i in self.input_channel_index:
-            print(f" {i:02} |", end="")
-        print("")
+        n = 2
+        for j in range(n):
+            start = j * self.num_input_channels // n
+            stop = start + self.num_input_channels // n
 
-        print("Tested         | ", end="")
-        for i in self.input_channel_tested:
-            if i == 'Y':
-                color = "\033[92m"
-            else:
-                color = "\033[91m"
-            print(f"  {color}{i}\033[0m |", end="")
-        print("")
+            print("Channel number | ", end="")
+            for i in self.input_channel_index[start:stop]:
+                print(f" {i:02} |", end="")
+            print("")
 
-        print("")
+            print("Tested         | ", end="")
+            for i in self.input_channel_tested[start:stop]:
+                if i == 'Y':
+                    color = "\033[92m"
+                else:
+                    color = "\033[91m"
+                print(f"  {color}{i}\033[0m |", end="")
+            print("")
+            print("")
+
         print("Output Channels:")
         print("=============================")
         print("Channel number | ", end="")
@@ -291,22 +296,27 @@ class ManualIOTester():
         win.addstr("Input Channels:\n")
         win.addstr("=============================\n")
 
-        win.addstr("Channel number | ")
-        for i in self.input_channel_index:
-            win.addstr(f" {i:02} |")
-        win.addstr("\n")
+        n = 2
+        for j in range(n):
+            start = j * self.num_input_channels // n
+            stop = start + self.num_input_channels // n
 
-        win.addstr("Tested         | ")
-        for i in self.input_channel_tested:
-            win.addstr(f"  {i} |")
-        win.addstr("\n")
+            win.addstr("Channel number | ")
+            for i in self.input_channel_index[start:stop]:
+                win.addstr(f" {i:02} |")
+            win.addstr("\n")
 
-        win.addstr("Current State  | ")
-        for i in self.input_channel_state:
-            win.addstr(f"  {i} |")
-        win.addstr("\n")
+            win.addstr("Tested         | ")
+            for i in self.input_channel_tested[start:stop]:
+                win.addstr(f"  {i} |")
+            win.addstr("\n")
 
-        win.addstr("\n")
+            win.addstr("Current State  | ")
+            for i in self.input_channel_state[start:stop]:
+                win.addstr(f"  {i} |")
+            win.addstr("\n")
+            win.addstr("\n")
+
         win.addstr("Output Channels:\n")
         win.addstr("=============================\n")
         win.addstr("Channel number | ")
