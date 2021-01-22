@@ -223,7 +223,40 @@ class ManualIOTester():
         print("##########################################")
         print("")
 
+        input("Press a key to start the I/O testing...")
         curses.wrapper(self._main_curses)
+
+        print("I/O test stopped.")
+
+        print("")
+        print("Test Summary:")
+        print("")
+
+        print("Input Channels:\n")
+        print("=============================\n")
+
+        print("Channel number | ")
+        for i in self.input_channel_index:
+            print(" {i:02} |")
+        print("")
+
+        print("Tested         | ")
+        for i in self.input_channel_tested:
+            print("  {i} |")
+        print("")
+
+        print("")
+        print("Output Channels:\n")
+        print("=============================\n")
+        print("Channel number | ")
+        for i in self.output_channel_index:
+            print(f" {i:02} |")
+        print("")
+
+        print("Tested         | ")
+        for i in self.output_channel_tested:
+            print(f"  {i} |")
+        print("")
 
         print("")
         print("##########################################")
