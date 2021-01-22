@@ -310,13 +310,16 @@ class ManualIOTester():
 
             win.addstr("Tested         | ")
             for i in self.input_channel_tested[start:stop]:
-                win.addstr(f"  {i}", curses.color_pair(1 if i == "Y" else 2))
+                win.addstr(f"  {i}", curses.color_pair(
+                    self.green if i == "Y" else self.red))
                 win.addstr(" |")
             win.addstr("\n")
 
             win.addstr("Current State  | ")
             for i in self.input_channel_state[start:stop]:
-                win.addstr(f"  {i} |")
+                win.addstr(f"  {i}", curses.color_pair(
+                    self.magenta if i else self.blue))
+                win.addstr(" |")
             win.addstr("\n")
             win.addstr("\n")
 
@@ -330,14 +333,14 @@ class ManualIOTester():
         win.addstr("Tested         | ")
         for i in self.output_channel_tested:
             win.addstr(f"  {i}", curses.color_pair(
-                self.green_color_index if i == "Y" else self.red_color_index))
+                self.green if i == "Y" else self.red))
             win.addstr(" |")
         win.addstr("\n")
 
         win.addstr("Current State  | ")
         for i in self.output_channel_state:
             win.addstr(f"  {i}", curses.color_pair(
-                self.magenta_color_index if i else self.blue_color_index))
+                self.magenta if i else self.blue))
             win.addstr(" |")
         win.addstr("\n")
 
@@ -371,14 +374,14 @@ class ManualIOTester():
         """
         curses.start_color()
         curses.use_default_colors()
-        self.green_color_index = 1
-        self.red_color_index = 2
-        self.magenta_color_index = 3
-        self.blue_color_index = 4
-        curses.init_pair(self.green_color_index,   2, -1)  # 'Y' color, green
-        curses.init_pair(self.red_color_index,     1, -1)  # 'N' color, red
-        curses.init_pair(self.magenta_color_index, 5, -1)  # '1' color, magenta
-        curses.init_pair(self.blue_color_index,    4, -1)  # '0' color, blue
+        self.green = 1
+        self.red = 2
+        self.magenta = 3
+        self.blue = 4
+        curses.init_pair(self.green,   2, -1)  # 'Y' color, green
+        curses.init_pair(self.red,     1, -1)  # 'N' color, red
+        curses.init_pair(self.magenta, 5, -1)  # '1' color, magenta
+        curses.init_pair(self.blue,    4, -1)  # '0' color, blue
         win.timeout(1000)
         win.clear()
         self._print_io_table(win)
