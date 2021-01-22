@@ -174,18 +174,18 @@ checkFW()
         mcs_file=$(find ${fw_top_dir} -maxdepth 1 -name *mcs*)
         if [ ! -f "${mcs_file}" ]; then
             printf_failed "MCS file not found!."
-            print "\n"
+            printf "\n"
             exit 1
         fi
 
         mcs_file_name=$(basename ${mcs_file})
         printf_ok "Mcs file found: ${mcs_file_name}"
-        print "\n"
+        printf "\n"
 
         printf "Reading FW Git Hash via IPMI...                   "
         fw_gh=$(getGitHashFW)
         printf_ok "Firmware githash: '${fw_gh}'."
-        print "\n"
+        printf "\n"
 
         printf "Reading MCS file Git Hash...                      "
         mcs_gh=$(getGitHashMcs)
@@ -193,10 +193,10 @@ checkFW()
 
         if [ "${fw_gh}" == "${mcs_gh}" ]; then
             printf_ok "They match!."
-            print "\n"
+            printf "\n"
         else
             printf_failed "They don't match."
-            print "\n"
+            printf "\n"
             echo "Loading image..."
             ProgramFPGA.bash -s ${shelfmanager} -n ${slot} -c ${cpu_name} -m ${mcs_file}
         fi
