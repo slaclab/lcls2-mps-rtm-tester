@@ -15,6 +15,10 @@ class CpswRoot():
         Initialize object.
         """
 
+        # Define the number of inputs and output
+        self.num_inputs = 32
+        self.num_outputs = 8
+
         print(f"Connecting to FPGA (IP={ip_addr})...             ", end="")
 
         # Crate the CPSW root device
@@ -77,7 +81,7 @@ class CpswRoot():
         """
 
         # Check if the channel number is in range
-        if (channel < 0) or (channel > 7):
+        if (channel < 0) or (channel > (self.num_output - 1)):
             raise RuntimeError(f"Invalid output channel number {channel}")
 
         # Convert the channel number to a mask
@@ -102,7 +106,7 @@ class CpswRoot():
         """
 
         # Check if the word is in range
-        if (value < 0) or (value > 255):
+        if (value < 0) or (value >= 2**self.num_output):
             raise RuntimeError(f"Invalid output word value {value}")
 
         # Write the outputs
@@ -122,7 +126,7 @@ class CpswRoot():
         """
 
         # Check if the channel number is in range
-        if channel not in range(33):
+        if (channel < 0) or (channel >= self.num_inputs):
             raise RuntimeError(f"Invalid input channel number {channel}")
 
         # Convert the channel number to a mask
@@ -142,7 +146,7 @@ class CpswRoot():
         val = self.rtm_inputs.getVal()
 
         # Verify that the read word is in range
-        if val >= 2**32:
+        if (val < 0) or (val >= 2**self.num_inputs):
             raise RuntimeError(f"ERROR: Read input word {val} is out of range")
 
         return val
