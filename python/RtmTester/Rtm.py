@@ -3,14 +3,15 @@
 from pycpsw import Path, ScalVal, ScalVal_RO, YamlFixup
 
 
-class CpswRoot():
+class Rtm():
     """
-    CPSW Root Class.
+    RTM interface class. It uses CPSW to access the RTM related register in the
+    AMCc FPGA.
 
     This class crates an interface to the ATCA AMC carrier FPGA register space,
     using CPSW, for testing the MPS RTM board.
     """
-    def __init__(self, yaml_file, ip_addr, top_dev="NetIODev"):
+    def __init__(self, yaml_file, ip_addr, root_name="NetIODev"):
         """
         Initialize object.
         """
@@ -21,10 +22,10 @@ class CpswRoot():
 
         print(f"Connecting to FPGA (IP={ip_addr})...             ", end="")
 
-        # Crate the CPSW root device
+        # Crate the CPSW root
         self.root = Path.loadYamlFile(
             yaml_file,
-            rootName=top_dev,
+            rootName=root_name,
             yamlFixup=self.FixupRoot(ip_addr=ip_addr))
 
         # Create interfaces to the timing related registers

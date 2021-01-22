@@ -2,7 +2,7 @@
 
 import argparse
 
-from RtmTester.CpswRoot import CpswRoot
+from RtmTester.Rtm import Rtm
 from RtmTester.TimingTester import TimingTester
 
 
@@ -31,8 +31,8 @@ def get_args():
         '--root-name',
         type=str,
         default='NetIODev',
-        dest='root_dev_name',
-        help='Root device name (default = "NetIODev")')
+        dest='root_name',
+        help='RTM CPSW root device name (default = "NetIODev")')
 
     parser.add_argument(
         '--manual',
@@ -46,17 +46,17 @@ if __name__ == '__main__':
     # Get input arguments
     args = get_args()
 
-    # Crate CPSW root
-    root = CpswRoot(
+    # Crate CPSW rtm
+    rtm = Rtm(
         yaml_file=args.yaml_file,
         ip_addr=args.ip_addr,
-        top_dev=args.root_dev_name)
+        root_name=args.root_name)
 
     print("Starting tests...")
     print("")
 
     # Do timing tests
-    timing_tester = TimingTester(root=root)
+    timing_tester = TimingTester(rtm=rtm)
     timing_tester.run_tests()
 
     # Do I/O tests
@@ -64,7 +64,7 @@ if __name__ == '__main__':
         # Manual testing
         from RtmTester.IOTester import ManualIOTester as IOTester
 
-        io_tester = IOTester(root=root)
+        io_tester = IOTester(rtm=rtm)
         io_tester.run_tests()
 
     else:
@@ -72,7 +72,7 @@ if __name__ == '__main__':
         from RtmTester.IOTester import AutomaticIOTester as IOTester
 
         io_tester = IOTester(
-            root=root,
+            rtm=rtm,
             ip_addr='10.0.1.100',
             port_number=5000)
         io_tester.run_tests()

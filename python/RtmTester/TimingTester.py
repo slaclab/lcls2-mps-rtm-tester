@@ -4,11 +4,11 @@ class TimingTester():
     """
     Test the RTM Timing inputs.
     """
-    def __init__(self, root):
+    def __init__(self, rtm):
         """
         Initialize the object.
         """
-        self.root = root
+        self.rtm = rtm
 
     def run_tests(self):
         """
@@ -21,16 +21,16 @@ class TimingTester():
         print("")
 
         print("Testing LCLS1 mode timing...  ", end="")
-        self.root.setTimingLcls1mode()
-        if self.root.checkTimingLink():
+        self.rtm.setTimingLcls1mode()
+        if self.rtm.checkTimingLink():
             print("\033[92mPASS\033[0m")
         else:
             print("\033[91mFAILED\033[0m")
 
         # Set LCLS2 mode timing, and check if the link is up
         print("Testing LCLS2 mode timing...  ", end="")
-        self.root.setTimingLcls2mode()
-        if self.root.checkTimingLink():
+        self.rtm.setTimingLcls2mode()
+        if self.rtm.checkTimingLink():
             print("\033[92mPASS\033[0m")
         else:
             print("\033[91mFAILED\033[0m")

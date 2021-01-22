@@ -8,13 +8,13 @@ class AutomaticIOTester():
     Test the RTM I/O channels, using the tester device.
     """
 
-    def __init__(self, root, ip_addr, port_number):
+    def __init__(self, rtm, ip_addr, port_number):
         """
         initialize the object.
         """
 
-        # The CPSW root device
-        self.root = root
+        # The RTM device
+        self.rtm = rtm
 
         # Create a tester device object
         from RtmTester.TesterDevice import TesterDevice
@@ -195,12 +195,12 @@ class ManualIOTester():
     Test the RTM I/O channels, without using the tester device.
     """
 
-    def __init__(self, root):
+    def __init__(self, rtm):
         """
         initialize the object.
         """
 
-        self.root = root
+        self.rtm = rtm
 
         self.num_input_channels = 32
         self.num_output_channels = 8
@@ -225,7 +225,7 @@ class ManualIOTester():
 
         # Set all output to 0 initially
         print("Setting all outputs to 0...                       ", end="")
-        self.root.setRtmOutputWord(0)
+        self.rtm.setRtmOutputWord(0)
         print("Done!")
 
         print("")
@@ -275,7 +275,7 @@ class ManualIOTester():
         # Set all output to 0 after the test
         print("")
         print("Setting all outputs to 0...                       ", end="")
-        self.root.setRtmOutputWord(0)
+        self.rtm.setRtmOutputWord(0)
         print("Done!")
 
         print("")
@@ -349,7 +349,7 @@ class ManualIOTester():
                         if 0 <= ch <= 7:
                             # Toggle the output channel
                             new_val = not self.output_channel_state[ch]
-                            self.root.setRtmOutputChannel(ch, value=new_val)
+                            self.rtm.setRtmOutputChannel(ch, value=new_val)
                             self.output_channel_state[ch] = int(new_val)
                             self.output_channel_tested[ch] = 'Y'
 
@@ -376,7 +376,7 @@ class ManualIOTester():
         """
 
         # Read the input states
-        new_inputs = self.root.getRtmInputListBits()
+        new_inputs = self.rtm.getRtmInputListBits()
 
         # Update the tested list
         # TO BE DONE
