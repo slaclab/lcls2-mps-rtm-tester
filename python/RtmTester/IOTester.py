@@ -379,7 +379,9 @@ class ManualIOTester():
         new_inputs = self.rtm.getRtmInputListBits()
 
         # Update the tested list
-        # TO BE DONE
+        for i in range(self.num_input_channels):
+            if new_inputs[i] != self.input_channel_state[i]:
+                self.input_channel_tested = 'Y'
 
         # Update the input state list
         self.input_channel_state = new_inputs
