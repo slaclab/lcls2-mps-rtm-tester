@@ -189,7 +189,7 @@ checkFW()
 
         printf "Reading MCS file Git Hash...                      "
         mcs_gh=$(getGitHashMcs)
-        printf "MCS file githash: '${mcs_gh}'. "
+        printf_ok "MCS file githash: '${mcs_gh}'. "
 
         if [ "${fw_gh}" == "${mcs_gh}" ]; then
             printf_ok "They match!."
