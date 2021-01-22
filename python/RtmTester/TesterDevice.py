@@ -48,9 +48,9 @@ class TesterDevice:
             subprocess.check_call(["ping", "-c2", ip_addr],
                                   stdout=dev_null,
                                   stderr=dev_null)
-            print("\033[92mDevice is online!\033[0m")
+            print("\033[32mDevice is online!\033[0m")
         except subprocess.CalledProcessError:
-            print("\033[91mERROR: Device is off-line!\033[0m")
+            print("\033[31mERROR: Device is off-line!\033[0m")
             print("")
             print("Aborting rest of the test.")
             exit(1)

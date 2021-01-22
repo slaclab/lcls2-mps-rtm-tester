@@ -23,17 +23,17 @@ class TimingTester():
         print("Testing LCLS1 mode timing...  ", end="")
         self.rtm.setTimingLcls1mode()
         if self.rtm.checkTimingLink():
-            print("\033[92mPASS\033[0m")
+            print("\033[32mPASS\033[0m")
         else:
-            print("\033[91mFAILED\033[0m")
+            print("\033[31mFAILED\033[0m")
 
         # Set LCLS2 mode timing, and check if the link is up
         print("Testing LCLS2 mode timing...  ", end="")
         self.rtm.setTimingLcls2mode()
         if self.rtm.checkTimingLink():
-            print("\033[92mPASS\033[0m")
+            print("\033[32mPASS\033[0m")
         else:
-            print("\033[91mFAILED\033[0m")
+            print("\033[31mFAILED\033[0m")
 
         print("")
         print("########################################")

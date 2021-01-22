@@ -234,11 +234,11 @@ executeRemoteCommand()
 # Print an OK message, using green color
 printf_ok()
 {
-    printf "\033[92m$1\033[0m"
+    printf "\033[32m$1\033[0m"
 }
 
 # Print a failed message, using red color
 printf_failed()
 {
-    printf "\033[91m$1\033[0m"
+    printf "\033[31m$1\033[0m"
 }

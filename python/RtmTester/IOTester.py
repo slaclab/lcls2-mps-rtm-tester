@@ -254,9 +254,9 @@ class ManualIOTester():
             print("Tested         | ", end="")
             for i in self.input_channel_tested[start:stop]:
                 if i == 'Y':
-                    color = "\033[92m"
+                    color = "\033[32m"
                 else:
-                    color = "\033[91m"
+                    color = "\033[31m"
                 print(f"  {color}{i}\033[0m |", end="")
             print("")
             print("")
@@ -271,9 +271,9 @@ class ManualIOTester():
         print("Tested         | ", end="")
         for i in self.output_channel_tested:
             if i == 'Y':
-                color = "\033[92m"
+                color = "\033[32m"
             else:
-                color = "\033[91m"
+                color = "\033[31m"
             print(f"  {color}{i}\033[0m |", end="")
         print("")
 
