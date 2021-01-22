@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from RtmTester.Helpers import print_ok, print_failed
+
 from pycpsw import Path, ScalVal, ScalVal_RO, YamlFixup
 
 
@@ -51,7 +53,7 @@ class Rtm():
             self.root.findByName(
                 "mmio/AppTop/AppCore/RtmMpsLinkNode/RtmDin"))
 
-        print("Done!")
+        print_ok("Done!")
 
     def setTimingLcls1mode(self):
         """

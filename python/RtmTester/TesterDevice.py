@@ -4,6 +4,8 @@ import os
 import subprocess
 import socket
 
+from RtmTester.Helpers import print_ok, print_failed
+
 
 class TesterDevice:
     """
@@ -21,7 +23,7 @@ class TesterDevice:
         try:
             socket.inet_aton(ip_addr)
         except OSError:
-            print(f"ERROR: Invalid tester device IP address: {ip_addr}")
+            print_failed(f"ERROR: Invalid tester device IP address: {ip_addr}")
             print("")
             print("Aborting rest of the test.")
             exit(1)
@@ -36,7 +38,7 @@ class TesterDevice:
             pass
 
         if not port_number_valid:
-            print(f"ERROR: Invalid port number: {port_number}")
+            print_failed(f"ERROR: Invalid port number: {port_number}")
             print("")
             print("Aborting rest of the test.")
             exit(1)
@@ -48,9 +50,9 @@ class TesterDevice:
             subprocess.check_call(["ping", "-c2", ip_addr],
                                   stdout=dev_null,
                                   stderr=dev_null)
-            print("\033[32mDevice is online!\033[0m")
+            print_ok("Device is online!")
         except subprocess.CalledProcessError:
-            print("\033[31mERROR: Device is off-line!\033[0m")
+            print_failed("ERROR: Device is off-line!")
             print("")
             print("Aborting rest of the test.")
             exit(1)

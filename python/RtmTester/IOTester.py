@@ -2,6 +2,8 @@
 
 import curses
 
+from RtmTester.Helpers import print_ok, print_failed
+
 
 class AutomaticIOTester():
     """
@@ -226,7 +228,7 @@ class ManualIOTester():
         # Set all output to 0 initially
         print("Setting all outputs to 0...                       ", end="")
         self.rtm.setRtmOutputWord(0)
-        print("Done!")
+        print_ok("Done!")
 
         print("")
         input("Press a key to start the I/O testing...")
@@ -254,10 +256,10 @@ class ManualIOTester():
             print("Tested         | ", end="")
             for i in self.input_channel_tested[start:stop]:
                 if i == 'Y':
-                    color = "\033[32m"
+                    print_ok(f"  {i}", end="")
                 else:
-                    color = "\033[31m"
-                print(f"  {color}{i}\033[0m |", end="")
+                    print_failed(f"  {i}", end="")
+                print(f" |", end="")
             print("")
             print("")
 
@@ -271,17 +273,17 @@ class ManualIOTester():
         print("Tested         | ", end="")
         for i in self.output_channel_tested:
             if i == 'Y':
-                color = "\033[32m"
+                print_ok(f"  {i}", end="")
             else:
-                color = "\033[31m"
-            print(f"  {color}{i}\033[0m |", end="")
+                print_failed(f"  {i}", end="")
+            print(f" |", end="")
         print("")
 
         # Set all output to 0 after the test
         print("")
         print("Setting all outputs to 0...                       ", end="")
         self.rtm.setRtmOutputWord(0)
-        print("Done!")
+        print_ok("Done!")
 
         print("")
         print("##########################################")
