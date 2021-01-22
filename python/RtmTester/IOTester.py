@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+import curses
+
+
 class AutomaticIOTester():
     """
     Test the RTM I/O channels, using the tester device.
@@ -197,8 +200,6 @@ class ManualIOTester():
         initialize the object.
         """
 
-        import curses
-
         self.root = root
 
         self.num_input_channels = 32
@@ -257,12 +258,12 @@ class ManualIOTester():
         win.addstr("=============================\n")
         win.addstr("Channel number | ")
         for i in self.output_channel_index:
-            win.addstr(f" {i:02} |", end="")
+            win.addstr(f" {i:02} |")
         win.addstr("\n")
 
         win.addstr("Tested         | ")
         for i in self.output_channel_tested:
-            win.addstr(f"  {i} |", end="")
+            win.addstr(f"  {i} |")
         win.addstr("\n")
 
         win.addstr("Current State  | ")
@@ -280,7 +281,7 @@ class ManualIOTester():
         while True:
             try:
                 key = win.getkey()
-                if key == '1\x1b':
+                if key == '\x1b':
                     break
                 else:
                     try:
