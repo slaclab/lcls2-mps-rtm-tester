@@ -147,6 +147,17 @@ class CpswRoot():
 
         return val
 
+    def getRtmInputListBits(self):
+        """
+        Get all the RTM input as a list of bits.
+        """
+
+        # Read the input word
+        w = self.getRtmInputWord()
+
+        # Convert the word to a list of bits
+        return [int(b) for b in bin(w)[2:].zfill(32)]
+
     class FixupRoot(YamlFixup):
         """
         YamlFixup class, use to override the IP address defined in YAML.
