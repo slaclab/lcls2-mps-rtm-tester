@@ -219,5 +219,5 @@ checkNodeConnection()
 # The command and arguments are passed as argument to this function.
 executeRemoteCommand()
 {
-    ssh -x ${cpu_user_name}@${cpu_name} $@
+    ssh ${cpu_user_name}@${cpu_name} -t "/bin/sh -ic \"$@\""
 }
