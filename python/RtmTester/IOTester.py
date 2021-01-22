@@ -354,7 +354,8 @@ class ManualIOTester():
                             self.output_channel_tested[ch] = 'Y'
 
                             # Update the input states
-                            self._update_input_states()
+                            self.input_channel_state = \
+                                self.root.getRtmInputListBits()
 
                             # Refresh the I/O table
                             win.clear()
@@ -364,15 +365,9 @@ class ManualIOTester():
                         pass
             except curses.error:
                 # Update the input states
-                self._update_input_states()
+                self.input_channel_state = \
+                    self.root.getRtmInputListBits()
 
                 # Refresh the I/O table
                 win.clear()
                 self._print_io_table(win)
-
-    def _update_input_states(self):
-        """
-        Read the input state, and update the list of states.
-        """
-
-        pass
