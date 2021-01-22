@@ -197,6 +197,8 @@ class ManualIOTester():
         initialize the object.
         """
 
+        import curses
+
         self.root = root
 
         self.num_input_channels = 32
@@ -220,7 +222,7 @@ class ManualIOTester():
         print("##########################################")
         print("")
 
-        self._print_io_table()
+        curses.wrapper(self._main_curses)
 
         print("")
         print("##########################################")
@@ -228,42 +230,67 @@ class ManualIOTester():
         print("##########################################")
         print("")
 
-    def _print_io_table(self):
+    def _print_io_table(self, win):
         """
         Print the I/O state table.
         """
-        print("Input Channels:")
-        print("=============================")
+        win.addstr("Input Channels:\n")
+        win.addstr("=============================\n")
 
-        print("Channel number | ", end="")
+        win.addstr("Channel number | ")
         for i in self.input_channel_index:
-            print(f" {i:02} |", end="")
-        print("")
+            win.addstr(f" {i:02} |")
+        win.addstr("\n")
 
-        print("Tested         | ", end="")
+        win.addstr("Tested         | ")
         for i in self.input_channel_tested:
-            print(f"  {i} |", end="")
-        print("")
+            win.addstr(f"  {i} |")
+        win.addstr("\n")
 
-        print("Current State  | ", end="")
+        win.addstr("Current State  | ")
         for i in self.input_channel_state:
-            print(f"  {i} |", end="")
-        print("")
+            win.addstr(f"  {i} |")
+        win.addstr("\n")
 
-        print("")
-        print("Output Channels:")
-        print("=============================")
-        print("Channel number | ", end="")
+        win.addstr("\n")
+        win.addstr("Output Channels:\n")
+        win.addstr("=============================\n")
+        win.addstr("Channel number | ")
         for i in self.output_channel_index:
-            print(f" {i:02} |", end="")
-        print("")
+            win.addstr(f" {i:02} |", end="")
+        win.addstr("\n")
 
-        print("Tested         | ", end="")
+        win.addstr("Tested         | ")
         for i in self.output_channel_tested:
-            print(f"  {i} |", end="")
-        print("")
+            win.addstr(f"  {i} |", end="")
+        win.addstr("\n")
 
-        print("Current State  | ", end="")
+        win.addstr("Current State  | ")
         for i in self.output_channel_state:
-            print(f"  {i} |", end="")
-        print("")
+            win.addstr(f"  {i} |")
+        win.addstr("\n")
+
+    def _main_curses(self, win):
+        """
+        Main curses application.
+        """
+        win.timeout(1000)
+        win.clear()
+        self._print_io_table(win)
+        while True:
+            try:
+                key = win.getkey()
+                if key == '1\x1b':
+                    break
+                else:
+                    try:
+                        ch = int(key)
+                        if 0 <= ch <= 7:
+                            self.root.setRtmOutputChannel(ch)
+                            win.clear()
+                            self._print_io_table(win)
+                    except ValueError:
+                        pass
+            except curses.error:
+                win.clear()
+                self._print_io_table(win)
