@@ -273,6 +273,7 @@ class ManualIOTester():
         print("")
 
         # Set all output to 0 after the test
+        print("")
         print("Setting all outputs to 0...                       ", end="")
         self.root.setRtmOutputWord(0)
         print("Done!")
