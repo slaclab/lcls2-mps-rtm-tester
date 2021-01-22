@@ -337,7 +337,7 @@ class ManualIOTester():
                             new_val = not self.output_channel_state[ch]
                             self.root.setRtmOutputChannel(ch, value=new_val)
                             self.output_channel_state[ch] = int(new_val)
-                            self.output_channel_tested[ch] = True
+                            self.output_channel_tested[ch] = 'Y'
 
                             # Update the input states
                             self._update_input_states()
