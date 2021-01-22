@@ -333,11 +333,32 @@ class ManualIOTester():
                     try:
                         ch = int(key)
                         if 0 <= ch <= 7:
-                            self.root.setRtmOutputChannel(ch)
+                            # Toggle the output channel
+                            new_val = not self.output_channel_state[ch]
+                            self.root.setRtmOutputChannel(ch, value=new_val)
+                            self.output_channel_state[ch] = int(new_val)
+                            self.output_channel_tested[ch] = True
+
+                            # Update the input states
+                            self._update_input_states()
+
+                            # Refresh the I/O table
                             win.clear()
                             self._print_io_table(win)
+
                     except ValueError:
                         pass
             except curses.error:
+                # Update the input states
+                self._update_input_states()
+
+                # Refresh the I/O table
                 win.clear()
                 self._print_io_table(win)
+
+    def _update_input_states(self):
+        """
+        Read the input state, and update the list of states.
+        """
+
+        pass
