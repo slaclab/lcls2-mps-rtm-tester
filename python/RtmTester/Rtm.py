@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from RtmTester.Helpers import print_ok, print_failed
+from RtmTester.Helpers import print_ok
 
 from pycpsw import Path, ScalVal, ScalVal_RO, YamlFixup
 

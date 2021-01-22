@@ -259,7 +259,7 @@ class ManualIOTester():
                     print_ok(f"  {i}", end="")
                 else:
                     print_failed(f"  {i}", end="")
-                print(f" |", end="")
+                print(" |", end="")
             print("")
             print("")
 
@@ -276,7 +276,7 @@ class ManualIOTester():
                 print_ok(f"  {i}", end="")
             else:
                 print_failed(f"  {i}", end="")
-            print(f" |", end="")
+            print(" |", end="")
         print("")
 
         # Set all output to 0 after the test
