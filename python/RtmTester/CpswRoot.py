@@ -121,7 +121,7 @@ class CpswRoot():
         mask = 1 << channel
 
         # Read the input channels word
-        inputs = self.rtm_inputs.getVal()
+        inputs = self.getRtmInputWord()
 
         # Return the status of the selected channel
         return bool(inputs & mask)
