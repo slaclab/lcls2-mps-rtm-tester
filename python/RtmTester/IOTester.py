@@ -344,9 +344,24 @@ class ManualIOTester():
         win.addstr("\n")
         win.addstr("Instructions:\n")
         win.addstr("-------------\n")
-        win.addstr("Press a number between 0 and 7 to "
-                   "toggle the corresponding output channel.\n")
-        win.addstr("Press the ESC key to stop test\n")
+        win.addstr("- The 'Input Channels' section shows the state of the "
+                   "input channels in real time.'\n")
+        win.addstr("  Change the physical input signal between high and low "
+                   "levels and verify that the corresponding state changes "
+                   "accordingly in this table. Test one channel at a time.\n")
+        win.addstr("  The row 'Tested' shows which channel has changed state "
+                   "during this test.\n")
+        win.addstr("- The 'Output Channels' section shows the current state"
+                   "of the output channels in real time.\n")
+        win.addstr("  Press a key number between 0 and 7 to toggle the "
+                   "corresponding output channel. Verify that the physical "
+                   "output level changes accordingly. Test one channel at a "
+                   "time.\n")
+        win.addstr("  The row 'Tested' shows which channel has changed state "
+                   "during this test.\n")
+        win.addstr("- The table is refreshed every second.\n")
+        win.addstr("- After testing all channel, press the 'ESC' key to stop "
+                   "the test. A summary will be presented at the end.\n")
 
     def _main_curses(self, win):
         """
