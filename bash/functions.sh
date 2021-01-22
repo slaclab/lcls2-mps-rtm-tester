@@ -154,11 +154,13 @@ getFpgaIpAddr()
 
     printf "Reading Crate ID via IPMI...                      "
     crate_id=$(getCrateId)
-    echo "Create ID: ${crate_id}."
+    printf_ok "Create ID: ${crate_id}."
+    printf "\n"
 
     printf "Calculating FPGA IP address...                    "
     fpga_ip=$(getFpgaIp)
-    echo "FPGA IP: ${fpga_ip}."
+    printf_ok "FPGA IP: ${fpga_ip}."
+    printf "\n"
 }
 
 # Check if firmware in FPGA matches MCS file
@@ -171,25 +173,30 @@ checkFW()
         printf "Looking for mcs file...                           "
         mcs_file=$(find ${fw_top_dir} -maxdepth 1 -name *mcs*)
         if [ ! -f "${mcs_file}" ]; then
-            echo "MCS file not found!."
+            printf_failed "MCS file not found!."
+            print "\n"
             exit 1
         fi
 
         mcs_file_name=$(basename ${mcs_file})
-        echo "Mcs file found: ${mcs_file_name}"
+        printf_ok "Mcs file found: ${mcs_file_name}"
+        print "\n"
 
         printf "Reading FW Git Hash via IPMI...                   "
         fw_gh=$(getGitHashFW)
-        echo "Firmware githash: '${fw_gh}'."
+        printf_ok "Firmware githash: '${fw_gh}'."
+        print "\n"
 
         printf "Reading MCS file Git Hash...                      "
         mcs_gh=$(getGitHashMcs)
         printf "MCS file githash: '${mcs_gh}'. "
 
         if [ "${fw_gh}" == "${mcs_gh}" ]; then
-            echo "They match!."
+            printf_ok "They match!."
+            print "\n"
         else
-            echo "They don't match."
+            printf_failed "They don't match."
+            print "\n"
             echo "Loading image..."
             ProgramFPGA.bash -s ${shelfmanager} -n ${slot} -c ${cpu_name} -m ${mcs_file}
         fi
@@ -208,10 +215,12 @@ checkNodeConnection()
     # Check connection with cpu. Exit on error
     printf "Checking connection with ${node_name}...         "
     if ! ping -c 2 ${node_name} &> /dev/null ; then
-        printf "Not reachable!\n"
+        printf_failed "Not reachable!"
+        printf "\n"
         exit 1
     else
-        printf "Connection OK!\n"
+        printf_ok "Connection OK!"
+        printf "\n"
     fi
 }
 
@@ -220,4 +229,16 @@ checkNodeConnection()
 executeRemoteCommand()
 {
     ssh ${cpu_user_name}@${cpu_name} -t "/bin/sh -ic \"$@\""
+}
+
+# Print an OK message, using green color
+printf_ok()
+{
+    printf "\033[92m$1\033[0m"
+}
+
+# Print a failed message, using red color
+printf_failed()
+{
+    printf "\033[91m$1\033[0m"
 }
