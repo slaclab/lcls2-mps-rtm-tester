@@ -65,4 +65,5 @@ fi
 executeRemoteCommand \
 	"export PYTHONPATH=${top_dir}/python/:${PYTHONPATH} && \
         . ${cpsw_env_script} > /dev/null && \
+        export TERM=xterm-256color && \
 	python3 ${top_dir}/scripts/test-rtm.py ${args}"
