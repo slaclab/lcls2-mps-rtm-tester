@@ -223,6 +223,12 @@ class ManualIOTester():
         print("##########################################")
         print("")
 
+        # Set all output to 0 initially
+        print("Setting all outputs to 0...                       ", end="")
+        self.root.setRtmOutputWord(0)
+        print("Done!")
+
+        print("")
         input("Press a key to start the I/O testing...")
         curses.wrapper(self._main_curses)
 
