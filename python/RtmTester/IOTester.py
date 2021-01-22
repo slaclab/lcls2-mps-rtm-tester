@@ -272,6 +272,11 @@ class ManualIOTester():
             print(f"  {color}{i}\033[0m |", end="")
         print("")
 
+        # Set all output to 0 after the test
+        print("Setting all outputs to 0...                       ", end="")
+        self.root.setRtmOutputWord(0)
+        print("Done!")
+
         print("")
         print("##########################################")
         print("###    End of Manual I/O Tests         ###")
