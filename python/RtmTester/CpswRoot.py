@@ -94,7 +94,7 @@ class CpswRoot():
             outputs &= ~mask
 
         # Write and verify the updated value
-        self._setAndVerifyRtmOutputs(value=outputs)
+        self.setRtmOutputWord(value=outputs)
 
     def setRtmOutputWord(self, value):
         """
@@ -105,8 +105,16 @@ class CpswRoot():
         if (value < 0) or (value > 255):
             raise RuntimeError(f"Invalid output word value {value}")
 
-        # Write and verify the outputs
-        self._setAndVerifyRtmOutputs(value=value)
+        # Write the outputs
+        self.rtm_output.setVal(value)
+
+        # Read back the output status
+        readback = self.rtm_output_rbv.getVal()
+
+        # Check if the read-back value matches with what we wrote
+        if readback != value:
+            raise RuntimeError("Outs were not set correctly. "
+                               f"Set = {value}, read-back = {readback}")
 
     def getRtmInputChannel(self, channel):
         """
@@ -138,22 +146,6 @@ class CpswRoot():
             raise RuntimeError(f"ERROR: Read input word {val} is out of range")
 
         return val
-
-    def _setAndVerifyRtmOutputs(self, value):
-        """
-        Write the output word and verify that the read-back matches.
-        """
-
-        # Write the outputs
-        self.rtm_output.setVal(value)
-
-        # Read back the output status
-        readback = self.rtm_output_rbv.getVal()
-
-        # Check if the read-back value matches with what we wrote
-        if readback != value:
-            raise RuntimeError("Outs were not set correctly. "
-                               f"Set = {value}, read-back = {readback}")
 
     class FixupRoot(YamlFixup):
         """
