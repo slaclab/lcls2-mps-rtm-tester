@@ -231,7 +231,7 @@ class ManualIOTester():
         print_ok("Done!")
 
         print("")
-        input("Press a key to start the I/O testing...")
+        input("Press ENTER to start the I/O testing...")
         curses.wrapper(self._main_curses)
 
         print("I/O test stopped.")
