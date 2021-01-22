@@ -238,30 +238,30 @@ class ManualIOTester():
         print("Test Summary:")
         print("")
 
-        print("Input Channels:\n")
-        print("=============================\n")
+        print("Input Channels:")
+        print("=============================")
 
-        print("Channel number | ")
+        print("Channel number | ", end="")
         for i in self.input_channel_index:
-            print(" {i:02} |")
+            print(" {i:02} |", end="")
         print("")
 
-        print("Tested         | ")
+        print("Tested         | ", end="")
         for i in self.input_channel_tested:
-            print("  {i} |")
+            print("  {i} |", end="")
         print("")
 
         print("")
-        print("Output Channels:\n")
-        print("=============================\n")
-        print("Channel number | ")
+        print("Output Channels:")
+        print("=============================")
+        print("Channel number | ", end="")
         for i in self.output_channel_index:
-            print(f" {i:02} |")
+            print(f" {i:02} |", end="")
         print("")
 
-        print("Tested         | ")
+        print("Tested         | ", end="")
         for i in self.output_channel_tested:
-            print(f"  {i} |")
+            print(f"  {i} |", end="")
         print("")
 
         print("")
