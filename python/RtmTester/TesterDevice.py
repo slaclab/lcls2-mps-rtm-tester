@@ -124,10 +124,10 @@ class TesterDevice:
             try:
                 self.socket.connect((ip_addr, port_number))
             except socket.error as e:
-                print("ERROR: Can not connect to target: {}".format(e))
+                print(f"ERROR: Can not connect to target: {e}")
                 raise
 
-            print("Connected to {}.{}".format(ip_addr, port_number))
+            print(f"Connected to {ip_addr}.{port_number}")
 
         def send(self, msg):
             """

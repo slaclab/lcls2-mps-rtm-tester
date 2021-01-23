@@ -30,8 +30,7 @@ class AutomaticIOTester():
         try:
             print(self.tester_device.readInfo())
         except RuntimeError as e:
-            print("readInfo() command returned with an error code. {}"
-                  .format(e))
+            print(f"readInfo() command returned with an error code. {e}")
             raise
 
     def run_tests(self):
@@ -70,15 +69,15 @@ class AutomaticIOTester():
                 else:
                     m = "FAILED"
                     in_ch_error_cnt += 1
-                    in_ch_log.append("Error in input channel {}. Set value was: {}, \
-                                     but read back value was {}."
-                                     .format(i, set_val, get_val))
+                    in_ch_log.append(f"Error in input channel {i}. \
+                                     Set value was: {set_val}, \
+                                     but read back value was {get_val}.")
 
                 in_ch_result[i] = m
 
             except RuntimeError as e:
-                print("writeOutputs({}) or getRtmInputWord() command failed "
-                      "on iteration {}. {}".format(set_val, i, e))
+                print(f"writeOutputs({set_val}) or getRtmInputWord() command "
+                      f"failed on iteration {i}. {e}")
                 # log result
             # handler cpsw exceptions
 
@@ -111,15 +110,15 @@ class AutomaticIOTester():
                 else:
                     m = "FAILED"
                     out_ch_error_cnt += 1
-                    out_ch_log.append("Error in output channel {}. Set value was: \
-                                      {}, but read back value was {}."
-                                      .format(i, set_val, get_val))
+                    out_ch_log.append(f"Error in output channel {i}. \
+                                      Set value was: {set_val}, \
+                                      but read back value was {get_val}.")
 
                 out_ch_result[i] = m
 
             except RuntimeError as e:
-                print("readInputs() or setRtmOutputWord({}) command failed "
-                      "on iteration {}. {}".format(set_val, i, e))
+                print(f"readInputs() or setRtmOutputWord({set_val}) command "
+                      f"failed on iteration {i}. {e}")
                 # log result
             # handler cpsw exceptions
 
@@ -139,7 +138,7 @@ class AutomaticIOTester():
         print("Channel | Test result")
         print("---------------------")
         for v, k in in_ch_result.items():
-            print("   {:02}   | {}".format(v, k))
+            print(f"   {v:02}   | {k}")
         print("---------------------")
         print("")
 
@@ -150,7 +149,7 @@ class AutomaticIOTester():
         print("-------------------------------")
         print("")
 
-        print("Number of Input Channel Fails: {}".format(in_ch_error_cnt))
+        print(f"Number of Input Channel Fails: {in_ch_error_cnt}")
         print("")
 
         print("Output Channels:")
@@ -161,7 +160,7 @@ class AutomaticIOTester():
         print("Channel | Test result")
         print("---------------------")
         for v, k in out_ch_result.items():
-            print("   {:02}   | {}".format(v, k))
+            print(f"   {v:02}   | {k}")
         print("---------------------")
         print("")
 
@@ -172,7 +171,7 @@ class AutomaticIOTester():
         print("-------------------------------")
         print("")
 
-        print("Number of Output Channels Fails: {}".format(out_ch_error_cnt))
+        print(f"Number of Output Channels Fails: {out_ch_error_cnt}")
         print("\n")
 
         print("")
