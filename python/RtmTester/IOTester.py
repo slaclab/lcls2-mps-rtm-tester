@@ -59,15 +59,10 @@ class AutomaticIOTester():
                 self.tester_device.writeOutputs(set_val)
 
                 # Read the values from the RTM inputs
-                # get_val = rtm_in.getVal()
-                get_val = set_val
+                get_val = self.rtm.getRtmInputWord()
 
                 # Verify that the write and read value match
-                # get_val == set_val?
-                if i == 3 or i == 7:
-                    get_val = 0
-
-                r = get_val == set_val
+                r = (get_val == set_val)
 
                 # Log result
                 if r:
@@ -82,8 +77,8 @@ class AutomaticIOTester():
                 in_ch_result[i] = m
 
             except RuntimeError as e:
-                print("writeOutputs({}) command failed on iteration {}. {}"
-                      .format(set_val, i, e))
+                print("writeOutputs({}) or getRtmInputWord() command failed "
+                      "on iteration {}. {}".format(set_val, i, e))
                 # log result
             # handler cpsw exceptions
 
@@ -102,18 +97,13 @@ class AutomaticIOTester():
                 set_val = 2**i
 
                 # Set the output value in the RTM
-                # trm_out.setVal(set_val)
+                self.rtm.setRtmOutputWord(value=set_val)
 
                 # Read the values from the tester device
                 get_val = self.tester_device.readInputs()
-                get_val = set_val
 
                 # Verify that the write and read value match
-                # get_val == set_val?
-                if i == 5:
-                    get_val = 0
-
-                r = get_val == set_val
+                r = (get_val == set_val)
 
                 # log result
                 if r:
@@ -128,8 +118,8 @@ class AutomaticIOTester():
                 out_ch_result[i] = m
 
             except RuntimeError as e:
-                print("readInputs() command failed on iteration {}. {}"
-                      .format(i, e))
+                print("readInputs() or setRtmOutputWord({}) command failed "
+                      "on iteration {}. {}".format(set_val, i, e))
                 # log result
             # handler cpsw exceptions
 
