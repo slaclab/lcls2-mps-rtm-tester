@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import time
+
 from RtmTester.Helpers import print_ok, print_failed
 
 
@@ -25,6 +27,7 @@ class TimingTester():
 
         print("Testing LCLS1 mode timing...  ", end="")
         self.rtm.setTimingLcls1mode()
+        time.sleep(2)
         if self.rtm.checkTimingLink():
             print_ok("PASS")
         else:
@@ -33,6 +36,7 @@ class TimingTester():
         # Set LCLS2 mode timing, and check if the link is up
         print("Testing LCLS2 mode timing...  ", end="")
         self.rtm.setTimingLcls2mode()
+        time.sleep(2)
         if self.rtm.checkTimingLink():
             print_ok("PASS")
         else:
