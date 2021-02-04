@@ -88,7 +88,7 @@ class Rtm():
             raise RuntimeError(f"Invalid output channel number {channel}")
 
         # Convert the channel number to a mask
-        mask = value << channel
+        mask = 1 << channel
 
         # Read the current status of the output word
         outputs = self.rtm_output.getVal()
