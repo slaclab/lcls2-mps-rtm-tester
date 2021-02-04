@@ -163,7 +163,7 @@ class Rtm():
         w = self.getRtmInputWord()
 
         # Convert the word to a list of bits
-        return [int(b) for b in bin(w)[2:].zfill(32)]
+        return [int(b) for b in bin(w)[2:].zfill(32)[::-1]]
 
     class FixupRoot(YamlFixup):
         """
