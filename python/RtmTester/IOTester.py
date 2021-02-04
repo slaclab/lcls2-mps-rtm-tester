@@ -384,7 +384,7 @@ class ManualIOTester():
                         ch = int(key)
                         if 0 <= ch <= 7:
                             # Toggle the output channel
-                            new_val = not self.output_channel_state[ch]
+                            new_val = self.output_channel_state[ch] ^ 1
                             self.rtm.setRtmOutputChannel(ch, value=new_val)
                             self.output_channel_state[ch] = int(new_val)
                             self.output_channel_tested[ch] = 'Y'
