@@ -198,7 +198,7 @@ checkFW()
             printf_failed "They don't match."
             printf "\n"
             echo "Loading image..."
-            ProgramFPGA.bash -s ${shelfmanager} -n ${slot} -c ${cpu_name} -m ${mcs_file}
+            ${ProgramFPGA} -s ${shelfmanager} -n ${slot} -c ${cpu_name} -m ${mcs_file}
         fi
     else
         echo "Check firmware disabled."

@@ -32,6 +32,9 @@ cpsw_version=R4.4.2
 # CPSW env script
 cpsw_env_script=${cpsw_top_dir}/${cpsw_version}/env.slac.sh
 
+# ProgramFPGA script location
+ProgramFPGA=/afs/slac/g/lcls/package/cpsw/utils/ProgramFPGA/current/ProgramFPGA.bash
+
 # Trap TERM signals and exit
 trap "echo 'An ERROR was found. Check shelf manager & card state! Aborting...'; exit 1" TERM
 
