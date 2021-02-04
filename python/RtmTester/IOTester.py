@@ -197,7 +197,7 @@ class ManualIOTester():
         self.num_output_channels = 8
 
         self.input_channel_index = list(range(self.num_input_channels))
-        self.input_channel_state = [0]*self.num_input_channels
+        self.input_channel_state = self.rtm.getRtmInputListBits()
         self.input_channel_tested = ['N']*self.num_input_channels
 
         self.output_channel_index = list(range(self.num_output_channels))
