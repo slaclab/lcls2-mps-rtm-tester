@@ -417,7 +417,7 @@ class ManualIOTester():
         # Update the tested list
         for i in range(self.num_input_channels):
             if new_inputs[i] != self.input_channel_state[i]:
-                self.input_channel_tested = 'Y'
+                self.input_channel_tested[i] = 'Y'
 
         # Update the input state list
         self.input_channel_state = new_inputs
